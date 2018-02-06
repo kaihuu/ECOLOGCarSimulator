@@ -28,9 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Button InsertButten;
+            InsertButten = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // InsertButten
+            // 
+            InsertButten.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            InsertButten.Location = new System.Drawing.Point(66, 90);
+            InsertButten.Name = "InsertButten";
+            InsertButten.Size = new System.Drawing.Size(139, 90);
+            InsertButten.TabIndex = 0;
+            InsertButten.Text = "Insert";
+            InsertButten.UseVisualStyleBackColor = true;
+            InsertButten.Click += new System.EventHandler(this.InsertButten_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(InsertButten);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

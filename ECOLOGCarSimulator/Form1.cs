@@ -16,5 +16,10 @@ namespace ECOLOGCarSimulator
         {
             InitializeComponent();
         }
+
+        private void InsertButten_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

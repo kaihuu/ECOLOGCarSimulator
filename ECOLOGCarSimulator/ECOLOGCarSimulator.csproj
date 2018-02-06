@@ -46,6 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculators\AccCalculator.cs" />
+    <Compile Include="Calculators\AccResistanceCalculator.cs" />
+    <Compile Include="Calculators\AirResistanceCalculator.cs" />
+    <Compile Include="Calculators\AltitudeCalculator.cs" />
+    <Compile Include="Calculators\ClimbingResistanceCalculator.cs" />
+    <Compile Include="Calculators\Components\Constants.cs" />
+    <Compile Include="Calculators\Components\HubenyDistanceCalculator.cs" />
+    <Compile Include="Calculators\ConsumedEnergyCaluculator.cs" />
+    <Compile Include="Calculators\ConvertLossCaluculator.cs" />
+    <Compile Include="Calculators\DistanceCalculator.cs" />
+    <Compile Include="Calculators\EfficiencyCalculator.cs" />
+    <Compile Include="Calculators\EquipmentEnergyCalculator.cs" />
+    <Compile Include="Calculators\HeadingCalculator.cs" />
+    <Compile Include="Calculators\LinkMatcher.cs" />
+    <Compile Include="Calculators\LostEnergyCalculator.cs" />
+    <Compile Include="Calculators\RegeneEnergyCalculator.cs" />
+    <Compile Include="Calculators\RegeneLossCalculator.cs" />
+    <Compile Include="Calculators\RollingResistanceCalculator.cs" />
+    <Compile Include="Calculators\SpeedCalculator.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +73,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
