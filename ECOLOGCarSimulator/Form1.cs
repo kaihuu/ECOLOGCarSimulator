@@ -35,12 +35,12 @@ namespace ECOLOGCarSimulator
             //ソートされたリンク（線）を取得する処理
             List<LinkData> linkList = getLinkList(id, startNum);
             //仮想ログデータを生成するメソッド
-            generateSimulationLog(ECOLOGData, linkList);
+            DataTable logData = generateSimulationLog(ECOLOGData, linkList);
             #endregion
 
             DataTable EcologSimulationTable = new DataTable();//DataTableUtil.GetEcolog…
             //ECOLOG計算をして，仮想ECOLOGデータを生成するメソッド
-            for (int i = 0; i < ECOLOGData.Rows.Count; i++)
+            for (int i = 0; i < logData.Rows.Count; i++)
             {
                 //DataRow ecologRow = HagimotoEcologCalculator.CalcEcologSimulation();を作る
                 //EcologSimulationTable.Rows.Add(ecologRow);
