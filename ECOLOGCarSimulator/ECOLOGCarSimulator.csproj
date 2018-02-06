@@ -115,6 +115,7 @@
     <Compile Include="Daos\EfficiencyDao.cs" />
     <Compile Include="Daos\EfficiencyMaxDao.cs" />
     <Compile Include="Daos\LinkDao.cs" />
+    <Compile Include="Daos\LinkDataGetterForMM.cs" />
     <Compile Include="Daos\LinkDetailDao.cs" />
     <Compile Include="Daos\LinksForSearchDao.cs" />
     <Compile Include="Daos\SemanticLinkDao.cs" />
@@ -133,6 +134,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inserters\AccInserter.cs" />
+    <Compile Include="Inserters\Components\AccCorrector.cs" />
+    <Compile Include="Inserters\Components\HagimotoEcologCalculator.cs" />
+    <Compile Include="Inserters\EcologInserter.cs" />
+    <Compile Include="Inserters\GpsInserter.cs" />
+    <Compile Include="Inserters\TripInserter.cs" />
     <Compile Include="Models\Altitude.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\Driver.cs" />

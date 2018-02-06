@@ -58,6 +58,13 @@ namespace SensorLogInserterRe.Daos
             return DatabaseAccesser.GetResult(query);
         }
 
+        public static DataTable GetSelectedData()
+        {
+            string query = "SELECT * FROM " + TableName;
+            //TODO SQL書き換え
+            return DatabaseAccesser.GetResult(query);
+        }
+
         public static DataTable Get(DateTime startPeriod, DateTime endPeriod)
         {
             StringBuilder query = new StringBuilder();
