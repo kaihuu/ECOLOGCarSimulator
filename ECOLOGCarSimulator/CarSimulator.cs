@@ -7,24 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SensorLogInserterRe.Daos;
-using SensorLogInserterRe.Models;
-using SensorLogInserterRe.Utils;
-using SensorLogInserterRe.Calculators;
+using ECOLOGCarSimulator.Daos;
+using ECOLOGCarSimulator.Models;
+using ECOLOGCarSimulator.Utils;
+using ECOLOGCarSimulator.Calculators;
 using System.Device.Location;
-using SensorLogInserterRe.Calculators.CalculatorComponents;
-using SensorLogInserterRe.Inserters.Components;
+using ECOLOGCarSimulator.Calculators.CalculatorComponents;
+using ECOLOGCarSimulator.Inserters.Components;
 
 namespace ECOLOGCarSimulator
 {
-    public partial class Form1 : Form
+    public partial class CarSimulator : Form
     {
-        public Form1()
+        public CarSimulator()
         {
             InitializeComponent();
         }
 
-        private void InsertButten_Click(object sender, EventArgs e)
+        private void InsertButton_Click(object sender, EventArgs e)
         {
             int id = 0; //セマンティックリンクID
             int startNum = 0;//スタート地点NUM
@@ -45,11 +45,10 @@ namespace ECOLOGCarSimulator
                 //DataRow ecologRow = HagimotoEcologCalculator.CalcEcologSimulation();を作る
                 //EcologSimulationTable.Rows.Add(ecologRow);
             }
+
             #region 仮想ECOLOGデータをデータベースインサートする処理
             //仮想ECOLOGデータをデータベースインサートするメソッド
-            //TO DO ECOLOGシミュレーションDAOを作って，インサートできるようにする．
-            // ECOLOGSimulationDao.Insert(EcologSimulationTable);
-            // ↑のメソッドを呼び出せば終了 
+            EcologSimulationDao.Insert(EcologSimulationTable);
             #endregion
         }
 

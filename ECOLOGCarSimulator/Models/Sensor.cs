@@ -5,7 +5,7 @@ using System.Text;
 
 using Livet;
 
-namespace SensorLogInserterRe.Models
+namespace ECOLOGCarSimulator.Models
 {
     public class Sensor : NotificationObject
     {

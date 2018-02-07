@@ -1,6 +1,6 @@
 ﻿namespace ECOLOGCarSimulator
 {
-    partial class Form1
+    partial class CarSimulator
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -36,12 +36,12 @@
             // 
             InsertButten.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             InsertButten.Location = new System.Drawing.Point(66, 90);
-            InsertButten.Name = "InsertButten";
+            InsertButten.Name = "InsertButton";
             InsertButten.Size = new System.Drawing.Size(139, 90);
             InsertButten.TabIndex = 0;
             InsertButten.Text = "Insert";
             InsertButten.UseVisualStyleBackColor = true;
-            InsertButten.Click += new System.EventHandler(this.InsertButten_Click);
+            InsertButten.Click += new System.EventHandler(this.InsertButton_Click);
             // 
             // Form1
             // 
@@ -49,8 +49,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(InsertButten);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "CarSimulation";
+            this.Text = "CarSimulation";
             this.ResumeLayout(false);
 
         }

@@ -6,16 +6,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorLogInserterRe.Calculators;
-using SensorLogInserterRe.Constant;
-using SensorLogInserterRe.Daos;
-using SensorLogInserterRe.Handlers.FileHandlers;
-using SensorLogInserterRe.Models;
-using SensorLogInserterRe.Utils;
-using SensorLogInserterRe.ViewModels;
-using SensorLogInserterRe.Cleansers.Components;
+using ECOLOGCarSimulator.Calculators;
+using ECOLOGCarSimulator.Constant;
+using ECOLOGCarSimulator.Daos;
+using ECOLOGCarSimulator.Handlers.FileHandlers;
+using ECOLOGCarSimulator.Models;
+using ECOLOGCarSimulator.Utils;
+using ECOLOGCarSimulator.ViewModels;
+using ECOLOGCarSimulator.Cleansers.Components;
 
-namespace SensorLogInserterRe.Inserters
+namespace ECOLOGCarSimulator.Inserters
 {
     class GpsInserter
     {

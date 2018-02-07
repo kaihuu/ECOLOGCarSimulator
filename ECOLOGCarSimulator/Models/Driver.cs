@@ -5,9 +5,9 @@ using System.Text;
 
 using Livet;
 using System.Data;
-using SensorLogInserterRe.Daos;
+using ECOLOGCarSimulator.Daos;
 
-namespace SensorLogInserterRe.Models
+namespace ECOLOGCarSimulator.Models
 {
     public class Driver : NotificationObject
     {

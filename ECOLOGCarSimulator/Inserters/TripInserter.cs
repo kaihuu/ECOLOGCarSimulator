@@ -4,13 +4,13 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorLogInserterRe.Constant;
-using SensorLogInserterRe.Daos;
-using SensorLogInserterRe.Models;
-using SensorLogInserterRe.Utils;
-using SensorLogInserterRe.ViewModels;
+using ECOLOGCarSimulator.Constant;
+using ECOLOGCarSimulator.Daos;
+using ECOLOGCarSimulator.Models;
+using ECOLOGCarSimulator.Utils;
+using ECOLOGCarSimulator.ViewModels;
 
-namespace SensorLogInserterRe.Inserters
+namespace ECOLOGCarSimulator.Inserters
 {
     class TripInserter
     {

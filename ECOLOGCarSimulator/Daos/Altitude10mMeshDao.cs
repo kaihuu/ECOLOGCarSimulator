@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Effects;
-using SensorLogInserterRe.Models;
+using ECOLOGCarSimulator.Models;
 
-namespace SensorLogInserterRe.Daos
+namespace ECOLOGCarSimulator.Daos
 {
     class Altitude10MMeshDao
     {

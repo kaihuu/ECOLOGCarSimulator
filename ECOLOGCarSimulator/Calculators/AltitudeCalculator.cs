@@ -4,9 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorLogInserterRe.Daos;
+using ECOLOGCarSimulator.Daos;
 
-namespace SensorLogInserterRe.Calculators
+namespace ECOLOGCarSimulator.Calculators
 {
     class AltitudeCalculator
     {

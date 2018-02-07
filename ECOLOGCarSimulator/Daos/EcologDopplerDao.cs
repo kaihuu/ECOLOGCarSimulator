@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SensorLogInserterRe.Daos
+namespace ECOLOGCarSimulator.Daos
 {
     class EcologDopplerDao
     {
@@ -53,16 +53,52 @@ namespace SensorLogInserterRe.Daos
 
         public static DataTable Get()
         {
-            string query = "SELECT * FROM " + TableName;
+            StringBuilder query = new StringBuilder();
+            query.AppendLine($"SELECT *");
+            query.AppendLine($"FROM " + TableName);
+            query.AppendLine($"WHERE link_id = 'RB140900511749'"); //シミュレーションの対象とする地点（サグ地点）の道路リンクID（ここから）
+            query.AppendLine($" OR link_id = 'RB140900511750'");
+            query.AppendLine($" OR link_id = 'RB140900511751'");
+            query.AppendLine($" OR link_id = 'RB140900511752'");
+            query.AppendLine($" OR link_id = 'RB140900511753'");
+            query.AppendLine($" OR link_id = 'RB140900511754'");
+            query.AppendLine($" OR link_id = 'RB140900511756'");
+            query.AppendLine($" OR link_id = 'RB140900519680'");
+            query.AppendLine($" OR link_id = 'RB140900519662'");
+            query.AppendLine($" OR link_id = 'RB140900519666'");
+            query.AppendLine($" OR link_id = 'RB140900519692'");
+            query.AppendLine($" OR link_id = 'RB140900519711'");
+            query.AppendLine($" OR link_id = 'RB140900714459'");
+            query.AppendLine($" OR link_id = 'RB140900714494'");
+            query.AppendLine($" OR link_id = 'RB140900714538'");
+            query.AppendLine($" OR link_id = 'RB140900714273'");//（ここまで）
 
-            return DatabaseAccesser.GetResult(query);
+            return DatabaseAccesser.GetResult(query.ToString());
         }
 
         public static DataTable GetSelectedData()
         {
-            string query = "SELECT * FROM " + TableName;
+            StringBuilder query = new StringBuilder();
+            query.AppendLine($"SELECT *");
+            query.AppendLine($"FROM " + TableName);
+            query.AppendLine($"WHERE link_id = 'RB140900511749'"); //シミュレーションの対象とする地点（サグ地点）の道路リンクID（ここから）
+            query.AppendLine($" OR link_id = 'RB140900511750'");
+            query.AppendLine($" OR link_id = 'RB140900511751'");
+            query.AppendLine($" OR link_id = 'RB140900511752'");
+            query.AppendLine($" OR link_id = 'RB140900511753'");
+            query.AppendLine($" OR link_id = 'RB140900511754'");
+            query.AppendLine($" OR link_id = 'RB140900511756'");
+            query.AppendLine($" OR link_id = 'RB140900519680'");
+            query.AppendLine($" OR link_id = 'RB140900519662'");
+            query.AppendLine($" OR link_id = 'RB140900519666'");
+            query.AppendLine($" OR link_id = 'RB140900519692'");
+            query.AppendLine($" OR link_id = 'RB140900519711'");
+            query.AppendLine($" OR link_id = 'RB140900714459'");
+            query.AppendLine($" OR link_id = 'RB140900714494'");
+            query.AppendLine($" OR link_id = 'RB140900714538'");
+            query.AppendLine($" OR link_id = 'RB140900714273'");//（ここまで）
             //TODO SQL書き換え
-            return DatabaseAccesser.GetResult(query);
+            return DatabaseAccesser.GetResult(query.ToString());
         }
 
         public static DataTable Get(DateTime startPeriod, DateTime endPeriod)
@@ -72,6 +108,22 @@ namespace SensorLogInserterRe.Daos
             query.AppendLine($"FROM " + TableName);
             query.AppendLine($"WHERE jst >= '{startPeriod}'");
             query.AppendLine($" AND jst <= '{endPeriod}'");
+            query.AppendLine($" AND link_id = 'RB140900511749'");//シミュレーションの対象とする地点（サグ地点）の道路リンクID（ここから）
+            query.AppendLine($" OR link_id = 'RB140900511750'");
+            query.AppendLine($" OR link_id = 'RB140900511751'");
+            query.AppendLine($" OR link_id = 'RB140900511752'");
+            query.AppendLine($" OR link_id = 'RB140900511753'");
+            query.AppendLine($" OR link_id = 'RB140900511754'");
+            query.AppendLine($" OR link_id = 'RB140900511756'");
+            query.AppendLine($" OR link_id = 'RB140900519680'");
+            query.AppendLine($" OR link_id = 'RB140900519662'");
+            query.AppendLine($" OR link_id = 'RB140900519666'");
+            query.AppendLine($" OR link_id = 'RB140900519692'");
+            query.AppendLine($" OR link_id = 'RB140900519711'");
+            query.AppendLine($" OR link_id = 'RB140900714459'");
+            query.AppendLine($" OR link_id = 'RB140900714494'");
+            query.AppendLine($" OR link_id = 'RB140900714538'");
+            query.AppendLine($" OR link_id = 'RB140900714273'");//（ここまで）
 
             return DatabaseAccesser.GetResult(query.ToString());
         }

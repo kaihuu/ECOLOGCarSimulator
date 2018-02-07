@@ -5,9 +5,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorLogInserterRe.Utils;
+using ECOLOGCarSimulator.Utils;
 
-namespace SensorLogInserterRe.Daos
+namespace ECOLOGCarSimulator.Daos
 {
     public class DatabaseAccesser
     {

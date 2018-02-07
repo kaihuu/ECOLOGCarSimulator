@@ -4,9 +4,9 @@ using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorLogInserterRe.Calculators.CalculatorComponents;
+using ECOLOGCarSimulator.Calculators.CalculatorComponents;
 
-namespace SensorLogInserterRe.Calculators
+namespace ECOLOGCarSimulator.Calculators
 {
    　static class SpeedCalculator
     {

@@ -1,11 +1,11 @@
-﻿using SensorLogInserterRe.Models;
+﻿using ECOLOGCarSimulator.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SensorLogInserterRe.Utils
+namespace ECOLOGCarSimulator.Utils
 {
     static class MathUtil
     {

@@ -4,14 +4,14 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorLogInserterRe.Constant;
-using SensorLogInserterRe.Daos;
-using SensorLogInserterRe.Handlers.FileHandlers;
-using SensorLogInserterRe.Models;
-using SensorLogInserterRe.Utils;
-using SensorLogInserterRe.Inserters.Components;
+using ECOLOGCarSimulator.Constant;
+using ECOLOGCarSimulator.Daos;
+using ECOLOGCarSimulator.Handlers.FileHandlers;
+using ECOLOGCarSimulator.Models;
+using ECOLOGCarSimulator.Utils;
+using ECOLOGCarSimulator.Inserters.Components;
 
-namespace SensorLogInserterRe.Inserters
+namespace ECOLOGCarSimulator.Inserters
 {
     class AccInserter
     {

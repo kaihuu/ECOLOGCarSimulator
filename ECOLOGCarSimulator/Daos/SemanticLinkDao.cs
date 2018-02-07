@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SensorLogInserterRe.Daos
+namespace ECOLOGCarSimulator.Daos
 {
     class SemanticLinkDao
     {

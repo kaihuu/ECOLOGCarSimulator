@@ -4,12 +4,12 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorLogInserterRe.Calculators;
-using SensorLogInserterRe.Daos;
-using SensorLogInserterRe.Models;
-using SensorLogInserterRe.Utils;
+using ECOLOGCarSimulator.Calculators;
+using ECOLOGCarSimulator.Daos;
+using ECOLOGCarSimulator.Models;
+using ECOLOGCarSimulator.Utils;
 
-namespace SensorLogInserterRe.Inserters.Components
+namespace ECOLOGCarSimulator.Inserters.Components
 {
     class HagimotoEcologCalculator
     {

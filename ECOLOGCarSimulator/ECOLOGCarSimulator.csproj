@@ -101,6 +101,7 @@
     <Compile Include="Daos\AndroidGpsRawDao.cs" />
     <Compile Include="Daos\AndroidGpsRawDopplerDao.cs" />
     <Compile Include="Daos\CarDao.cs" />
+    <Compile Include="Daos\EcologSimulationDao.cs" />
     <Compile Include="Daos\CorrectedAccDao.cs" />
     <Compile Include="Daos\CorrectedGpsDao.cs" />
     <Compile Include="Daos\CorrectedGPSDopplerDao.cs" />
@@ -128,11 +129,11 @@
     <Compile Include="Daos\TripsRawSpeedLPF005MMDao.cs" />
     <Compile Include="Daos\TripsSpeedLPF005MMDao.cs" />
     <Compile Include="DynamicJson.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="CarSimulator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CarSimulator.Designer.cs">
+      <DependentUpon>CarSimulator.cs</DependentUpon>
     </Compile>
     <Compile Include="Inserters\AccInserter.cs" />
     <Compile Include="Inserters\Components\AccCorrector.cs" />
@@ -160,8 +161,8 @@
     <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Utils\SlackUtil.cs" />
     <Compile Include="Utils\StringUtil.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="CarSimulator.resx">
+      <DependentUpon>CarSimulator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

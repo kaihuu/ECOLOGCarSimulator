@@ -4,9 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorLogInserterRe.Models;
+using ECOLOGCarSimulator.Models;
 
-namespace SensorLogInserterRe.Daos
+namespace ECOLOGCarSimulator.Daos
 {
     class CorrectedGpsDao
     {

@@ -1,6 +1,6 @@
-﻿using SensorLogInserterRe.Daos;
-using SensorLogInserterRe.Models;
-using SensorLogInserterRe.Utils;
+﻿using ECOLOGCarSimulator.Daos;
+using ECOLOGCarSimulator.Models;
+using ECOLOGCarSimulator.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SensorLogInserterRe.Calculators
+namespace ECOLOGCarSimulator.Calculators
 {
     class EfficiencyCalculator
     {

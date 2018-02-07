@@ -4,15 +4,15 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorLogInserterRe.Daos;
-using SensorLogInserterRe.Models;
-using SensorLogInserterRe.Utils;
+using ECOLOGCarSimulator.Daos;
+using ECOLOGCarSimulator.Models;
+using ECOLOGCarSimulator.Utils;
 
 /***
  * クソみたいなコードだけどこれ以上無理だわ加速度使う人あとはこれを何とかしてくれ元のコードですら合ってるかわからんリファクタリングして更にわけわかんなくなってる
  ***/
 
-namespace SensorLogInserterRe.Inserters.Components
+namespace ECOLOGCarSimulator.Inserters.Components
 {
     class AccCorrector
     {

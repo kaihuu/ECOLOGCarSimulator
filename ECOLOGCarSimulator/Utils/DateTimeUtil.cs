@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SensorLogInserterRe.Utils
+namespace ECOLOGCarSimulator.Utils
 {
     static class DateTimeUtil
     {
