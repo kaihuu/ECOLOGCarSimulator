@@ -99,6 +99,52 @@ namespace ECOLOGCarSimulator.Inserters.Components
             return ecologTable;
         }
 
+        private static DataTable CalcEcologSimulation(DataRow tripRow, InsertDatum datum, InsertConfig.GpsCorrection correction)
+        {
+            var correctedGpsTable = new DataTable();
+            if (correction == InsertConfig.GpsCorrection.SpeedLPFMapMatching)
+            {
+                correctedGpsTable = CorrectedGpsSpeedLPF005MMDao.GetNormalized(tripRow.Field<DateTime>(TripsDao.ColumnStartTime),
+                tripRow.Field<DateTime>(TripsDao.ColumnEndTime), datum);
+            }
+            else if (correction == InsertConfig.GpsCorrection.MapMatching)
+            {
+                correctedGpsTable = CorrectedGPSMMDao.GetNormalized(tripRow.Field<DateTime>(TripsDao.ColumnStartTime),
+                tripRow.Field<DateTime>(TripsDao.ColumnEndTime), datum);
+            }
+            else if (correction == InsertConfig.GpsCorrection.Normal)
+            {
+                correctedGpsTable = CorrectedGpsDao.GetNormalized(tripRow.Field<DateTime>(TripsDao.ColumnStartTime),
+                        tripRow.Field<DateTime>(TripsDao.ColumnEndTime), datum);
+            }
+
+            var ecologTable = DataTableUtil.GetEcologTable();
+            if (correctedGpsTable.Rows.Count == 0)
+            {
+                return ecologTable;
+            }
+            var firstRow = GenerateFirstEcologRow(
+                ecologTable.NewRow(), tripRow, correctedGpsTable.Rows[0], datum);
+
+            ecologTable.Rows.Add(firstRow);
+
+            var beforeRow = ecologTable.NewRow();
+            beforeRow.ItemArray = firstRow.ItemArray;
+
+            for (int i = 1; i < correctedGpsTable.Rows.Count; i++)
+            {
+                var row = GenerateEcologRow(
+                    ecologTable.NewRow(), beforeRow, tripRow, correctedGpsTable.Rows[i], datum);
+
+                ecologTable.Rows.Add(row);
+
+                beforeRow.ItemArray = row.ItemArray;
+            }
+
+            return ecologTable;
+        }
+
+
         private static DataRow GenerateFirstEcologRow(DataRow newRow, DataRow tripRow, DataRow correctedGpsRow, InsertDatum datum)
         {
             newRow.SetField(EcologDao.ColumnTripId, tripRow.Field<int>(TripsDao.ColumnTripId));

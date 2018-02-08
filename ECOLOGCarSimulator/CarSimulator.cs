@@ -31,7 +31,7 @@ namespace ECOLOGCarSimulator
 
             #region 仮想ログデータ（JST，車速，車間距離）を生成する処理
             //ECOLOGデータを取得する処理
-            DataTable ECOLOGData = EcologDopplerDao.GetSelectedData();//仮引数は，トリップIDや時間を指定することで取得できる．要適当に変更
+            DataTable ECOLOGData = EcologDopplerDao.GetSelectedData();//仮引数は，トリップIDや時間を指定することで取得できる．要適当に変更←SELECT以下変更済
             //ソートされたリンク（線）を取得する処理
             List<LinkData> linkList = getLinkList(id, startNum);
             //仮想ログデータを生成するメソッド
@@ -42,8 +42,8 @@ namespace ECOLOGCarSimulator
             //ECOLOG計算をして，仮想ECOLOGデータを生成するメソッド
             for (int i = 0; i < logData.Rows.Count; i++)
             {
-                //DataRow ecologRow = HagimotoEcologCalculator.CalcEcologSimulation();を作る
-                //EcologSimulationTable.Rows.Add(ecologRow);
+                DataRow ecologRow = HagimotoEcologCalculator.CalcEcologSimulation();//TODO: 引数の設定、返り値をシミュレーションのデータに
+                EcologSimulationTable.Rows.Add(ecologRow);
             }
 
             #region 仮想ECOLOGデータをデータベースインサートする処理
@@ -52,18 +52,20 @@ namespace ECOLOGCarSimulator
             #endregion
         }
 
-        private DataTable generateSimulationLog(DataTable ECOLOGData, List<LinkData> linkList)
+        private DataTable generateSimulationLog(DataTable ECOLOGData, List<LinkData> linkList)//仮想のECOLOGデータを生成
         {
 
             for (int i = 0; i < ECOLOGData.Rows.Count; i++)
             {
-                //DataTable simulationTable = DataTableUtil.GetEcologTable();//これを返り値
+                //TODO: DataTable simulationTable = DataTableUtil.GetEcologTable();//これを返り値
 
                 double longitude = 0, latitude = 0;
                 Tuple<int, double> linkComp = searchLinkComponent(linkList, latitude, longitude);
 
+                
 
-            //linklistとlinkCompをつかって，車間距離を取った位置のデータを作る処理．
+
+            //TODO: linklistとlinkCompをつかって，車間距離を取った位置のデータを作る処理．
             // var row = GenerateSimulationLog();    
             //simulation.Rows.Add(row);
 
