@@ -30,24 +30,26 @@ namespace ECOLOGCarSimulator
             int startNum = 0;//スタート地点NUM
 
             #region 仮想ログデータ（JST，車速，車間距離）を生成する処理
-            //ECOLOGデータを取得する処理
-            DataTable ECOLOGData = EcologSimulationDao.GetSelectedData();//仮引数は，トリップIDや時間を指定することで取得できる．SELECT以下変更済
+            //ECOLOGテーブルから，SQLで指定した範囲のECOLOGデータをDataTable型で取得する処理
+            DataTable ECOLOGData = EcologSimulationDao.GetSelectedData();
             //ソートされたリンク（線）を取得する処理
             List<LinkData> linkList = getLinkList(id, startNum);
             //仮想ログデータを生成するメソッド
             DataTable logData = generateSimulationLog(ECOLOGData, linkList);
             #endregion
 
-            DataTable EcologSimulationTable = new DataTable();//DataTableUtil.GetEcolog…
+            DataTable EcologSimulationTable = new DataTable();//仮想の走行ログから生成したECOLOGデータを格納するDataTableを作成
+            EcologSimulationTable = DataTableUtil.GetEcologTable();//↑で生成したDataTableのスキーマをECOLOGテーブルの形にする
+            
             //ECOLOG計算をして，仮想ECOLOGデータを生成するメソッド
             for (int i = 0; i < logData.Rows.Count; i++)
             {
-                DataRow ecologRow = HagimotoEcologCalculator.CalcEcologSimulation();//TODO: 引数の設定、返り値をシミュレーションのデータに
+                DataRow ecologRow = HagimotoEcologCalculator.CalcEcologSimulation(DataRow tripRow, InsertDatum datum, InsertConfig.GpsCorrection.Normal);//TODO: 仮想のGPSログを元にtripRow, Datumを設定
                 EcologSimulationTable.Rows.Add(ecologRow);
             }
 
             #region 仮想ECOLOGデータをデータベースインサートする処理
-            //仮想ECOLOGデータをデータベースインサートするメソッド
+            //仮想ECOLOGデータをECOLOG_SIMULATIONテーブルへインサートするメソッド
             EcologSimulationDao.Insert(EcologSimulationTable);
             #endregion
         }
