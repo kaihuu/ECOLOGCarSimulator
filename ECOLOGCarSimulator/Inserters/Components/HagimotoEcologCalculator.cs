@@ -102,17 +102,7 @@ namespace ECOLOGCarSimulator.Inserters.Components
         private static DataTable CalcEcologSimulation(DataRow tripRow, InsertDatum datum, InsertConfig.GpsCorrection correction)
         {
             var correctedGpsTable = new DataTable();
-            if (correction == InsertConfig.GpsCorrection.SpeedLPFMapMatching)
-            {
-                correctedGpsTable = CorrectedGpsSpeedLPF005MMDao.GetNormalized(tripRow.Field<DateTime>(TripsDao.ColumnStartTime),
-                tripRow.Field<DateTime>(TripsDao.ColumnEndTime), datum);
-            }
-            else if (correction == InsertConfig.GpsCorrection.MapMatching)
-            {
-                correctedGpsTable = CorrectedGPSMMDao.GetNormalized(tripRow.Field<DateTime>(TripsDao.ColumnStartTime),
-                tripRow.Field<DateTime>(TripsDao.ColumnEndTime), datum);
-            }
-            else if (correction == InsertConfig.GpsCorrection.Normal)
+            if (correction == InsertConfig.GpsCorrection.Normal)
             {
                 correctedGpsTable = CorrectedGpsDao.GetNormalized(tripRow.Field<DateTime>(TripsDao.ColumnStartTime),
                         tripRow.Field<DateTime>(TripsDao.ColumnEndTime), datum);

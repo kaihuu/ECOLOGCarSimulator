@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,169 +21,50 @@ namespace ECOLOGCarSimulator
 {
     public partial class CarSimulator : Form
     {
-        public CarSimulator()
+        /*public CarSimulator()
         {
             InitializeComponent();
-        }
+        }*/
 
         private void InsertButton_Click(object sender, EventArgs e)
         {
-            int id = 0; //セマンティックリンクID
-            int startNum = 0;//スタート地点NUM
+            string filePath = @"C:\Users\isobe\Desktop\";//TODO: ファイルパス・ファイル名を読み込む必要アリ
+            string fileName = "20180215182054UnsentGPS.csv";//TODO: ファイルパス・ファイル名を読み込む必要アリ
+            DataTable RawDataTable = getDataTableFromCSV(filePath, fileName);//.csvからのデータを生データ用のDataTableに格納
 
-            #region 仮想ログデータ（JST，車速，車間距離）を生成する処理
-            //ECOLOGテーブルから，SQLで指定した範囲のECOLOGデータをDataTable型で取得する処理
-            DataTable ECOLOGData = EcologSimulationDao.GetSelectedData();
-            //ソートされたリンク（線）を取得する処理
-            List<LinkData> linkList = getLinkList(id, startNum);
-            //仮想ログデータを生成するメソッド
-            DataTable logData = generateSimulationLog(ECOLOGData, linkList);
-            #endregion
-
-            DataTable EcologSimulationTable = new DataTable();//仮想の走行ログから生成したECOLOGデータを格納するDataTableを作成
+            DataTable EcologSimulationTable = new DataTable();//仮想の走行ログから生成した仮想ECOLOGデータを格納するDataTableを作成
             EcologSimulationTable = DataTableUtil.GetEcologTable();//↑で生成したDataTableのスキーマをECOLOGテーブルの形にする
-            
+
             //ECOLOG計算をして，仮想ECOLOGデータを生成するメソッド
-            for (int i = 0; i < logData.Rows.Count; i++)
+            for (int i = 0; i < RawDataTable.Rows.Count; i++)
             {
-                DataRow ecologRow = HagimotoEcologCalculator.CalcEcologSimulation(DataRow tripRow, InsertDatum datum, InsertConfig.GpsCorrection.Normal);//TODO: 仮想のGPSログを元にtripRow, Datumを設定
-                EcologSimulationTable.Rows.Add(ecologRow);
+                DataRow ecologRow = HagimotoEcologCalculator.CalcEcologSimulation(DataRow tripRow,
+                    InsertDatum datum, InsertConfig.GpsCorrection.Normal);//TODO: 仮想のGPSログを元にtripRow, Datumを設定
+                EcologSimulationTable.Rows.Add(ecologRow);//仮想ECOLOGデータ格納用のDatatableにECOLOGデータを1行挿入
             }
 
-            #region 仮想ECOLOGデータをデータベースインサートする処理
-            //仮想ECOLOGデータをECOLOG_SIMULATIONテーブルへインサートするメソッド
+            //仮想ECOLOGデータのDataTableをデータベースへインサート
             EcologSimulationDao.Insert(EcologSimulationTable);
-            #endregion
         }
 
-        private DataTable generateSimulationLog(DataTable ECOLOGData, List<LinkData> linkList)//仮想のECOLOGデータを生成
+        //.csvからDataTable型のデータを作成するメソッド
+        private DataTable getDataTableFromCSV(string filePath, string fileName)//引数は.csvのファイルパス, ファイル名
         {
+            //.csvファイルのパスに接続
+            string conString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="
+                + filePath + ";Extended Properties=\"text;HDR=No;FMT=Delimited\"";
+            System.Data.OleDb.OleDbConnection con =
+                new System.Data.OleDb.OleDbConnection(conString);
 
-            for (int i = 0; i < ECOLOGData.Rows.Count; i++)
-            {
-                double longitude = 0, latitude = 0; 
-                Tuple<int, double> linkComp = searchLinkComponent(linkList, latitude, longitude);
+            //.csvをDataAdapter da に読み込む
+            string commText = "SELECT * FROM [" + fileName + "]";
+            System.Data.OleDb.OleDbDataAdapter da =
+                new System.Data.OleDb.OleDbDataAdapter(commText, con);
 
-
-
-
-                //TODO: linklistとlinkCompをつかって，車間距離を取った位置のデータを作る処理．
-                //var row = simulationLogGenerator();    
-                //simulation.Rows.Add(row);
-
-                //TODO: DataTable simulationTable = DataTableUtil.GetEcologTable();//これを返り値
-
-            }
-
-
-
-            return new DataTable();//TODO生成したシミュレーションログを返す
-        }
-
-        private simulationLogGenerator()
-        {
-            return;
-        }
-
-        private Tuple<int,double> searchLinkComponent(List<LinkData> linkList, double latitude, double longitude)
-        {
-            double minDist = 255;
-
-
-            int tempNum = 0;
-            string tempLinkId = null;
-            double offset = 0;
-            //各リンクセグメントに対して
-            for (int i = 0; i < linkList.Count; i++)
-            {
-                TwoDimensionalVector linkStartEdge = new TwoDimensionalVector(linkList[i].START_LAT, linkList[i].START_LONG);
-                TwoDimensionalVector linkEndEdge = new TwoDimensionalVector(linkList[i].END_LAT, linkList[i].END_LONG);
-                TwoDimensionalVector GPSPoint = new TwoDimensionalVector(latitude, longitude);
-
-                //線分内の最近傍点を探す
-                TwoDimensionalVector matchedPoint = TwoDimensionalVector.nearest(linkStartEdge, linkEndEdge, GPSPoint);
-
-                //最近傍点との距離
-                double tempDist = TwoDimensionalVector.distance(GPSPoint, matchedPoint);
-
-
-                //リンク集合の中での距離最小を探す
-                if (tempDist < minDist)
-                {
-
-                    minDist = tempDist;
-
-                    tempNum = linkList[i].NUM;
-                    tempLinkId = linkList[i].LINK_ID;
-
-                    offset = HubenyDistanceCalculator.CalcHubenyFormula(linkList[i].START_LAT, linkList[i].START_LONG, latitude, longitude);
-                }
-            }
-
-            return new Tuple<int, double>(tempNum, offset);
-        }
-
-        private List<LinkData> getLinkList(int id, int startNum)
-        {
-            
-
-            DataTable LinkTable = LinkDataGetterForMM.LinkTableGetter2(id);
-            DataRow[] LinkRows = LinkTable.Select(null, "NUM");
-            DataRow[] StartLink = LinkTable.Select("NUM = " + startNum);
-            List<LinkData> linkList = new List<LinkData>();
-
-            linkList.Add(new LinkData(Convert.ToString(StartLink[0]["LINK_ID"]), Convert.ToInt32(StartLink[0]["NUM"]),
-                Convert.ToDouble(StartLink[0]["START_LAT"]), Convert.ToDouble(StartLink[0]["START_LONG"]),
-                Convert.ToDouble(StartLink[0]["END_LAT"]), Convert.ToDouble(StartLink[0]["END_LONG"]), Convert.ToDouble(StartLink[0]["DISTANCE"])));
-
-            //スタート地点のリンクを初期値に設定
-
-            Boolean flag = true;
-            int j = 0;
-            while (flag)
-            {
-                flag = false;
-                for (int i = 0; i < LinkRows.Length; i++)
-                {
-                    if (Convert.ToDouble(LinkRows[i]["START_LAT"]) == linkList[j].END_LAT && Convert.ToDouble(LinkRows[i]["START_LONG"]) == linkList[j].END_LONG
-                        && (Convert.ToDouble(LinkRows[i]["END_LAT"]) != linkList[j].START_LAT || Convert.ToDouble(LinkRows[i]["END_LONG"]) != linkList[j].START_LONG))
-                    {
-
-                        linkList.Add(new LinkData(Convert.ToString(LinkRows[i]["LINK_ID"]), Convert.ToInt32(LinkRows[i]["NUM"]),
-                        Convert.ToDouble(LinkRows[i]["START_LAT"]), Convert.ToDouble(LinkRows[i]["START_LONG"]),
-                        Convert.ToDouble(LinkRows[i]["END_LAT"]), Convert.ToDouble(LinkRows[i]["END_LONG"]), Convert.ToDouble(LinkRows[i]["DISTANCE"])));
-                        j++;
-                        flag = true;
-                        break;
-                    }
-                }
-
-            }
-            return linkList;
-        }
-
-
-        private class LinkData
-        {
-            public string LINK_ID { get; set; }
-            public int NUM { get; set; }
-            public double START_LAT { get; set; }
-            public double START_LONG { get; set; }
-            public double END_LAT { get; set; }
-            public double END_LONG { get; set; }
-
-            public double DISTANCE { get; set; }
-
-            public LinkData(String LINK_ID, int NUM, double START_LAT, double START_LONG, double END_LAT, double END_LONG, double DISTANCE)
-            {
-                this.LINK_ID = LINK_ID;
-                this.NUM = NUM;
-                this.START_LAT = START_LAT;
-                this.START_LONG = START_LONG;
-                this.END_LAT = END_LAT;
-                this.END_LONG = END_LONG;
-                this.DISTANCE = DISTANCE;
-            }
+            //DataTable型のデータdtに.csvの内容を格納，dataTableを返す
+            DataTable dataTable = new DataTable();
+            da.Fill(dataTable);
+            return dataTable;
         }
     }
 }
